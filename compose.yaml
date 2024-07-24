@@ -1,0 +1,11 @@
+services:
+  mysql:
+    container_name: 'coding-test'
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=JavaTest'
+      - 'MYSQL_PASSWORD=test1234'
+      - 'MYSQL_ROOT_PASSWORD=Elite&1234'
+      - 'MYSQL_USER=ken'
+    ports:
+      - '3306:3306'
