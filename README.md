@@ -1,4 +1,6 @@
-Hi. Since this is for the backend engineer coding test use, I will be writing this guide for people who are an expert in Java already.
+Final Version. The Import process is now under 30 seconds and a new import_progress table is added to check the progress from SQL. 
+
+Hi. Since this is for the backend engineer coding test use, I will be writing this guide for people who are already experts in Java.
 
 Prerequisites:
 This project uses Maven and Java 22. Please install the latest Maven and Java 22. Docker and MySQL are also required.
@@ -57,8 +59,8 @@ Run Steps:
 5. Use /getTotalSales to test for task 4.
 
 Note:
-When running the application, the time used to do each endpoint task will be shown in the application console section (in milliseconds). Currently, the import process for 1 mil records is taking 90-100 seconds. 
-Tried to fine-tune the batch process, but this is the best I can get to so far. Still working on that 30-second requirement... Task 2's tracking progress is still incomplete (because still working on the import process).
+When running the application, the time used to do each endpoint task will be shown in the application console section (in milliseconds). 
+While importing records, progress will shown in the console screen and also in the SQL table import_progress. 
 
 
 
