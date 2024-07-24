@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface Game_SalesRepository extends PagingAndSortingRepository<Game_Sales, Integer>, CrudRepository<Game_Sales, Integer> {
+public interface Game_SalesRepository extends CrudRepository<Game_Sales, Integer>, PagingAndSortingRepository<Game_Sales, Integer>  {
 
     List<Game_Sales> findAll();
 

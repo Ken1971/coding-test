@@ -17,6 +17,9 @@ import java.util.TimeZone;
 import java.lang.Double;
 
 import coding.test.model.Game_Sales;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -25,6 +28,33 @@ import org.springframework.web.multipart.MultipartFile;
 public class CSVHelper {
     public static String TYPE = "text/csv";
     static String[] GAMEHEADERS = {"id", "game_no", "game_name", "game_code", "type", "cost_price", "tax", "sale_price", "date_of_sale" };
+
+    public static class EntityManagerFactoryHelper {
+
+        private static EntityManagerFactory factory;
+
+        static {
+            try {
+                // Set up factory right here
+                factory = Persistence.createEntityManagerFactory("jpa-example");
+            } catch(ExceptionInInitializerError e) {
+                throw e;
+            }
+        }
+
+        public static EntityManagerFactory getFactory() {
+            return factory;
+        }
+
+        public static EntityManager getEntityManager() {
+            return factory.createEntityManager();
+        }
+
+        public static void shutDown() {
+            factory.close();
+        }
+
+    }
 
     public static boolean hasCSVFormat(MultipartFile file) {
 
@@ -75,8 +105,8 @@ public class CSVHelper {
 
             for (CSVRecord csvRecord : csvRecords) {
                 Game_Sales gameSale = new Game_Sales(
-                        //Long.parseLong(csvRecord.get(GAMEHEADERS[0])),
-                        0L,
+                        Long.parseLong(csvRecord.get(GAMEHEADERS[0])),
+                        //0L,
                         Integer.parseInt(csvRecord.get(GAMEHEADERS[1])),
                         csvRecord.get(GAMEHEADERS[2]),
                         csvRecord.get(GAMEHEADERS[3]),
@@ -92,7 +122,7 @@ public class CSVHelper {
             }
 
             return gameSales;
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
     }
